@@ -1,5 +1,5 @@
 # PS: Please note
-I haven't been able to finish the project yet. I'm still working on it.
+This is still a work in progress
 
 # Getting Started with Create React App
 
