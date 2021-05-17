@@ -1,0 +1,140 @@
+.loading-page__icon-container {
+  margin-bottom: 8px;
+}
+
+.loading-page__icon-container__icon {
+  font-size: 32px;
+}
+
+.chat-page {
+  display: flex;
+  width: 600px;
+  margin: 0 auto;
+  height: 100vh;
+  background: #fff;
+}
+
+.users-list {
+  width: 250px;
+  flex-shrink: 0;
+  border-right: 1px solid #e9e9e9;
+}
+
+.users-list__item {
+  padding: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #e9e9e9;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.users-list__item:hover {
+  background: #fafafa;
+}
+
+.user-info {
+  background: #333;
+  color: #fff;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.user-info__email {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.user-info__icon {
+  margin-right: 8px;
+}
+
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat__recipient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #e9e9e9;
+  height: 60px;
+}
+
+.chat__recipient__email {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chat__messages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  padding: 0 16px 16px;
+
+  overflow: auto;
+}
+
+.chat__messages__message {
+  background: #1d3fbd;
+  color: #fff;
+  margin: 1px 0;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 17px;
+  font-weight: 500;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.chat__messages__message:first-child {
+  margin-top: 16px;
+}
+
+.chat__messages__message:last-child {
+  margin-bottom: 16px;
+}
+
+.chat__messages__message:not(.chat__messages__message--mine)
+  + .chat__messages__message--mine,
+.chat__messages__message--mine
+  + .chat__messages__message:not(.chat__messages__message--mine) {
+  margin-top: 24px;
+}
+
+.chat__messages__message--mine {
+  align-self: flex-end;
+  background: #f0f0f0;
+  color: #454545;
+  margin-right: 8px;
+}
+
+.chat__form {
+  flex-shrink: 0;
+  padding: 16px;
+  border-top: 1px solid #e9e9e9;
+}
+
+.chat__form__input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  outline: none;
+  display: block;
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  border-radius: 4px;
+  padding: 12px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #446694;
+  box-shadow: 0 16px 18px rgba(0, 0, 0, 0.05);
+}
