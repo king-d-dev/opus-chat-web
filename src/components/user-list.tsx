@@ -1,21 +1,14 @@
-import React, { useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useActions } from '../hooks/use-actions';
-import { useTypedSelector } from '../hooks/use-typed-selector';
-import { socket } from '../lib/socket';
-import { Message, SocketEvent, User } from '../types';
+import React, { useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useActions } from "../hooks/use-actions";
+import { useTypedSelector } from "../hooks/use-typed-selector";
+import { socket } from "../lib/socket";
+import { Message, SocketEvent, User } from "../types";
 
 export default function UserList() {
   const auth0 = useAuth0();
   const users = useTypedSelector(({ users }) => users.all);
-  const {
-    setUser,
-    setUsers,
-    removeUser,
-    setCurrentChat,
-    setMessages,
-    addMessage,
-  } = useActions();
+  const { setUser, setUsers, removeUser, setCurrentChat, setMessages, addMessage } = useActions();
 
   useEffect(() => {
     socket.on(SocketEvent.USERS, (users) => {
@@ -23,10 +16,10 @@ export default function UserList() {
     });
 
     socket.on(SocketEvent.USER_CONNECTED, (user: User) => {
-      if (user.email !== auth0.user.email) setUser(user);
+      if (user.email !== auth0.user!.email) setUser(user);
     });
 
-    socket.on(SocketEvent.USER_DISCONNECTED, (email: User['email']) => {
+    socket.on(SocketEvent.USER_DISCONNECTED, (email: User["email"]) => {
       removeUser(email);
     });
 
@@ -34,12 +27,9 @@ export default function UserList() {
       addMessage({ message, otherUser: message.from });
     });
 
-    socket.on(
-      SocketEvent.MESSAGES,
-      (messageMap: { [key: string]: Message[] }) => {
-        setMessages(messageMap);
-      }
-    );
+    socket.on(SocketEvent.MESSAGES, (messageMap: { [key: string]: Message[] }) => {
+      setMessages(messageMap);
+    });
 
     return () => {
       socket.off(SocketEvent.USERS);
@@ -48,28 +38,17 @@ export default function UserList() {
       socket.off(SocketEvent.MESSAGE);
       socket.off(SocketEvent.MESSAGES);
     };
-  }, [
-    setUser,
-    setUsers,
-    removeUser,
-    auth0.user.email,
-    setMessages,
-    addMessage,
-  ]);
+  }, [setUser, setUsers, removeUser, auth0.user!.email, setMessages, addMessage]);
 
   return (
     <div className="users-list">
       <div className="user-info">
         <i className="fas fa-user user-info__icon" />
-        <p className="user-info__email">{auth0.user.email}</p>
+        <p className="user-info__email">{auth0.user!.email}</p>
       </div>
       <ul>
         {Object.values(users).map((user) => (
-          <li
-            className="users-list__item"
-            key={user.email}
-            onClick={() => setCurrentChat(user.email)}
-          >
+          <li className="users-list__item" key={user.email} onClick={() => setCurrentChat(user.email)}>
             {user.email}
           </li>
         ))}

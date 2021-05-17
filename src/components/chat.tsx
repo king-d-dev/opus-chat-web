@@ -13,7 +13,8 @@ type FormData = { text: string };
 export default function Chat() {
   const { register, handleSubmit, setValue } = useForm<FormData>();
   const { addMessage } = useActions();
-  const { user } = useAuth0();
+  const autho = useAuth0();
+  const user = autho.user!;
 
   const currentChat = useTypedSelector(({ users }) => users.currentChat);
 
@@ -31,7 +32,7 @@ export default function Chat() {
     addMessage({
       message: {
         text,
-        from: user!.email,
+        from: user.email!,
         to: currentChat as string,
         id: nanoid(),
       },
@@ -58,7 +59,7 @@ export default function Chat() {
           <li
             key={message.id}
             className={classnames("chat__messages__message", {
-              "chat__messages__message--mine": message.from === user.email,
+              "chat__messages__message--mine": message.from === user.email!,
             })}
           >
             {message.text}
